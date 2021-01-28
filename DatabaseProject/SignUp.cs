@@ -15,7 +15,7 @@ namespace DatabaseProject
     public partial class SignUp : Form
     {
 
-        DBAccess dBAccess = new DBAccess();
+        DBAccess objDBAccess = new DBAccess();
 
         public SignUp()
         {
@@ -61,7 +61,7 @@ namespace DatabaseProject
             else if (userEmail.Equals(""))
             {
                 MessageBox.Show("Please enter your user email.");
-            } 
+            }
             else if (userPassword.Equals(""))
             {
                 MessageBox.Show("Please enter your user password.");
@@ -73,6 +73,27 @@ namespace DatabaseProject
             else
             {
                 SqlCommand insertCommand = new SqlCommand("insert into Users(Name,Email,Password,Country) values (@userName, @userEmail, @userPassword, @userCountry)");
+
+                insertCommand.Parameters.AddWithValue("@userName", userName);
+                insertCommand.Parameters.AddWithValue("@userEmail", userEmail);
+                insertCommand.Parameters.AddWithValue("@userPassword", userPassword);
+                insertCommand.Parameters.AddWithValue("@userCountry", userCountry);
+
+                int row = objDBAccess.executeQuery(insertCommand);
+
+                if (row == 1)
+                {
+                    MessageBox.Show("Account Created Successfully.");
+
+                    this.Hide();
+                    HomePage home = new HomePage();
+                    home.Show();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Error Occured. Try Again.");
+                }
             }
 
         }
