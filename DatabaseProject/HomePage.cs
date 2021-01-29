@@ -119,7 +119,30 @@ namespace DatabaseProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DialogResult dialog = MessageBox.Show("Are you sure?", "Delete Account", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+            if(dialog == DialogResult.Yes)
+            {
+                string query = "DELETE from Users Where ID = '" + Signin.id + "' ";
+
+                SqlCommand deleteCommand = new SqlCommand(query);
+
+                int row = objDBAccess.executeQuery(deleteCommand);
+
+                if (row == 1)
+                {
+                    MessageBox.Show("Account Deleted Successfully.");
+
+                    this.Hide();
+                    Signin login = new Signin();
+                    login.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("Error Occured. Try Again.");
+                }
+            }
         }
     }
 }

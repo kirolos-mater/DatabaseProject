@@ -86,8 +86,8 @@ namespace DatabaseProject
                     MessageBox.Show("Account Created Successfully.");
 
                     this.Hide();
-                    HomePage home = new HomePage();
-                    home.Show();
+                    Signin login = new Signin();
+                    login.Show();
                     
                 }
                 else
