@@ -12,6 +12,7 @@ namespace DatabaseProject
 {
     public partial class Signin : Form
     {
+        public static string id, name, email, password, country;
 
         DBAccess objDBAccess = new DBAccess();
         DataTable dtUsers = new DataTable();
@@ -47,6 +48,14 @@ namespace DatabaseProject
 
                 if(dtUsers.Rows.Count == 1)
                 {
+
+                    id = dtUsers.Rows[0]["ID"].ToString();
+                    name = dtUsers.Rows[0]["Name"].ToString();
+                    email = dtUsers.Rows[0]["Email"].ToString();
+                    password = dtUsers.Rows[0]["Password"].ToString();
+                    country = dtUsers.Rows[0]["Country"].ToString();
+
+
                     MessageBox.Show("Congratulations, you are logged in Succcessfully!");
                     objDBAccess.closeConn();
 
@@ -60,6 +69,13 @@ namespace DatabaseProject
                     MessageBox.Show("Invalid Credentials.");
                 }
             }
+        }
+
+        private void lblCreateAccount_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            SignUp signUp = new SignUp();
+            signUp.Show();
         }
     }
 }
